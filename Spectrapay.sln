@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34221.43
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrapay", "Spectrapay\Spectrapay.csproj", "{B196F732-9A6C-497C-AA4F-DBF3A851405C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrapay.Models", "Spectrapay.Models\Spectrapay.Models.csproj", "{2DCCBFB1-7612-447A-8599-CC9536FCDB7E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Spectrapay.Services", "Spectrapay.Services\Spectrapay.Services.csproj", "{ED6A0C6B-AB9D-405E-8758-B1BDD33EBFA0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B196F732-9A6C-497C-AA4F-DBF3A851405C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B196F732-9A6C-497C-AA4F-DBF3A851405C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B196F732-9A6C-497C-AA4F-DBF3A851405C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B196F732-9A6C-497C-AA4F-DBF3A851405C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DCCBFB1-7612-447A-8599-CC9536FCDB7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DCCBFB1-7612-447A-8599-CC9536FCDB7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DCCBFB1-7612-447A-8599-CC9536FCDB7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DCCBFB1-7612-447A-8599-CC9536FCDB7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED6A0C6B-AB9D-405E-8758-B1BDD33EBFA0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED6A0C6B-AB9D-405E-8758-B1BDD33EBFA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED6A0C6B-AB9D-405E-8758-B1BDD33EBFA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED6A0C6B-AB9D-405E-8758-B1BDD33EBFA0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {24865A4E-7B8E-4F14-A6C1-CF56EA22FD27}
+	EndGlobalSection
+EndGlobal
