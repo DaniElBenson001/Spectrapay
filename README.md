@@ -78,3 +78,15 @@ SpectraPay
 ├── SpectraPay.Tests          // Unit and integration tests
 │
 └── SpectraPay.sln            // Solution file
+```
+
+### Response Structure
+
+```plaintext
+{
+  Status: boolean,
+  StatusMessage: string,
+  Data: {...}
+}
+
+
