@@ -19,18 +19,16 @@ namespace Spectrapay.Services.Services
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly DataContext _context;
-        private readonly IConfiguration _configuration;
 
-        public PaymentService(IHttpContextAccessor httpContextAccessor, DataContext context, IConfiguration configuration)
+        public PaymentService(IHttpContextAccessor httpContextAccessor, DataContext context)
         {
-            _configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
             _context = context;
         }
 
-        public async Task<DataResponse<string>> MakeTransaction(PaymentDTO transfer)
+        public async Task<DataResponse<string>> MakeTransfer(PaymentDTO transfer)
         {
-            var transferResponse = new DataResponse<string>();
+            DataResponse<string> transferResponse = new();
             int userId;
 
             try
@@ -87,12 +85,15 @@ namespace Spectrapay.Services.Services
 
                 Transaction newTransaction = new()
                 {
-                    SenderId = SenderAcctIdToGuid,
-                    ReceiverId = ReceiverAcctIdToGuid,
+                    SenderAcctId = SenderAcctIdToGuid,
+                    ReceiverAcctId = ReceiverAcctIdToGuid,
                     Amount = transfer.Amount,
                     Timestamp = DateTime.Now,
                     TransactionType = TransactionType.Transfer,
                     TransactionStatus = Status.Pending,
+                    SenderIdNum = SenderAcctData.Id,
+                    ReceiverIdNum = ReceiverAcctdata.Id,
+                    TransactionId = GenerateRandomString()
                 };
 
                 SenderAcctData.VirtualBalance -= transfer.Amount;
@@ -114,6 +115,13 @@ namespace Spectrapay.Services.Services
                 transferResponse.StatusMessage = "Unsuccessful, An Error Occurred!";
                 return transferResponse;
             }
+        }
+
+        public string GenerateRandomString()
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            var random = new Random();
+            return new string(Enumerable.Repeat(chars, 16).Select(s => s[random.Next(s.Length)]).ToArray());
         }
     }
 }

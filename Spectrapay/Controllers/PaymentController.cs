@@ -19,7 +19,7 @@ namespace Spectrapay.Controllers
         [HttpPut("transfer"), Authorize]
         public async Task<IActionResult> makeTransaction(PaymentDTO transfer)
         {
-            var res = await _paymentService.MakeTransaction(transfer);
+            var res = await _paymentService.MakeTransfer(transfer);
             return Ok(res);
         }
     }

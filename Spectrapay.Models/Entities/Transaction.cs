@@ -14,20 +14,23 @@ namespace Spectrapay.Models.Entities
     }
     public enum TransactionType
     {
-        Payment,
-        Transfer,
-        Refund
+       Payment,
+       Transfer,
+       Refund
     }
 
     public record class Transaction
     {
         public int Id { get; set; }
-        public Guid SenderId { get; set; }
-        public Guid ReceiverId { get; set; }
+        public Guid SenderAcctId { get; set; }
+        public Guid ReceiverAcctId { get; set; }
         public decimal? Amount { get; set; }
         public Status TransactionStatus { get; set; }
         public TransactionType TransactionType { get; set; }
+        public string TransactionId { get; set; } = string.Empty;
         public DateTime? Timestamp {  get; set; }
+        public int SenderIdNum { get; set; }
+        public int ReceiverIdNum { get; set; }
 
     }
 }

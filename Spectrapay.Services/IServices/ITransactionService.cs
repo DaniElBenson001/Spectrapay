@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace Spectrapay.Services.IServices
 {
-    public interface IPaymentService
+    public interface ITransactionService
     {
-        Task<DataResponse<string>> MakeTransfer(PaymentDTO transfer);
+        Task<List<TransactionsDTO>> GetTransactionHistory();
     }
 }

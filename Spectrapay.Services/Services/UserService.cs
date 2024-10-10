@@ -26,7 +26,7 @@ namespace Spectrapay.Services.Services
         }
         public async Task<DataResponse<string>> CreateUser(CreateUserDTO request)
         {
-            DataResponse<string> dataResponse = new DataResponse<string>();
+            DataResponse<string> dataResponse = new();
             var username = await _context.Users.AnyAsync(u => u.Username == request.Username);
 
             PasswordHashGenerator(request.Password!,

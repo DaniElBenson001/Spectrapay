@@ -30,7 +30,7 @@ namespace Spectrapay.Services.Services
 
         public async Task<DataResponse<LoginView>> Login(LoginUserDTO request)
         {
-            var loginResponse = new DataResponse<LoginView>();
+            DataResponse<LoginView> loginResponse = new();
 
             try
             {

@@ -51,6 +51,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IPaymentService, PaymentService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
+
 
 var app = builder.Build();
 
