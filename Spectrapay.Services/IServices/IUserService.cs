@@ -10,5 +10,6 @@ namespace Spectrapay.Services.IServices
     public interface IUserService
     {
         Task<DataResponse<string>> CreateUser(CreateUserDTO request);
+        Task<DataResponse<UserInfoDTO>> GetUserInfo();
     }
 }

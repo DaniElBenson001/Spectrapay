@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Spectrapay.Models.DtoModels;
 using Spectrapay.Services.IServices;
@@ -22,5 +23,11 @@ namespace Spectrapay.Controllers
             return Ok(res);
         }
 
+        [HttpGet("get-user-info"), Authorize]
+        public async Task<IActionResult> GetUserInfo()
+        {
+            var res = await _userService.GetUserInfo();
+            return Ok(res);
+        }
     }
 }

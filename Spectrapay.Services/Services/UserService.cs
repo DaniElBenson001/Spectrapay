@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace Spectrapay.Services.Services
 {
@@ -68,6 +69,46 @@ namespace Spectrapay.Services.Services
                 dataResponse.Status = false;
                 dataResponse.StatusMessage = "Unsuccessful, an Error occured!";
                 return dataResponse;
+            }
+        }
+
+        public async Task<DataResponse<UserInfoDTO>> GetUserInfo()
+        {
+            DataResponse<UserInfoDTO> infoResponse = new();
+
+            int userID;
+
+            try
+            {
+                userID = Convert.ToInt32(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier));
+
+                if(_httpContextAccessor.HttpContext == null)
+                {
+                    infoResponse.Status = false;
+                    infoResponse.StatusMessage = "User Not Found!";
+                    return infoResponse;
+                }
+
+                var userData = await _context.Users
+                   .Where(u => u.Id == userID)
+                   .Select(u => new UserInfoDTO
+                   {
+                       Username = u.Username,
+                       AcctId = u.AccountId,
+                       VirtBalance = u.VirtualBalance
+                   })
+                   .FirstOrDefaultAsync();
+
+                infoResponse.Status = true;
+                infoResponse.StatusMessage = "Successful";
+                infoResponse.Data = userData;
+                return infoResponse;
+            }
+            catch( Exception )
+            {
+                infoResponse.Status = false;
+                infoResponse.StatusMessage = "Error Occurred Somewhere!";
+                return infoResponse;
             }
         }
 
