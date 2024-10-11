@@ -9,6 +9,6 @@ namespace Spectrapay.Services.IServices
 {
     public interface IPaymentService
     {
-        Task<DataResponse<string>> MakeTransfer(PaymentDTO transfer);
+        Task<DataResponse<NotificationMessageDTO>> MakeTransfer(PaymentDTO transfer);
     }
 }

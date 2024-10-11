@@ -29,9 +29,9 @@ namespace Spectrapay.Services.Services
         }
         
 
-        public async Task<DataResponse<string>> MakeTransfer(PaymentDTO transfer)
+        public async Task<DataResponse<NotificationMessageDTO>> MakeTransfer(PaymentDTO transfer)
         {
-            DataResponse<string> transferResponse = new();
+            DataResponse<NotificationMessageDTO> transferResponse = new();
             int userId;
 
             try
@@ -109,6 +109,12 @@ namespace Spectrapay.Services.Services
                 string senderMessage = $"You just sent {transfer.Amount} to {ReceiverAcctIdToGuid}";
                 string receiverMessage = $"You just received {transfer.Amount} from {SenderAcctIdToGuid}";
 
+                NotificationMessageDTO notifOutput = new()
+                {
+                    SenderMessage = senderMessage,
+                    ReceiverMessage = receiverMessage,
+                };
+
                 await _notificationService.AddNotificationAsync(SenderAcctData.Id, senderMessage);
                 await _notificationService.AddNotificationAsync(ReceiverAcctdata.Id, receiverMessage);
 
@@ -116,7 +122,7 @@ namespace Spectrapay.Services.Services
 
                 transferResponse.Status = true;
                 transferResponse.StatusMessage = "Transfer Successful";
-                transferResponse.Data = "Notifications sent to both sender and receiver.";
+                transferResponse.Data = notifOutput;
                 return transferResponse;
             }
             catch(Exception ex)

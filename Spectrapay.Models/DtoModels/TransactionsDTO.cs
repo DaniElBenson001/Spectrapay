@@ -20,5 +20,21 @@ namespace Spectrapay.Models.DtoModels
         public TransactionType TxnType { get; set; }
         public TransType TransferType { get; set; }
         public Status TxnStatus { get; set; }
+        public string TxnId { get; set; } = string.Empty;
+        public Guid SenderAcctId { get; set; }
+        public Guid ReceiverAcctId { get; set;}
+
+    }
+
+    public record class TransactionsGeneralDTO
+    {
+        public decimal? Amount { get; set; }
+        public DateTime? Timestamp { get; set; }
+        public TransactionType TxnType { get; set; }
+        public TransType TransferType { get; set; }
+        public Status TxnStatus { get; set; }
+        public string TxnId { get; set; } = string.Empty;
+        public Guid SenderAcctId { get; set; }
+        public Guid ReceiverAcctId { get; set; }
     }
 }

@@ -11,5 +11,6 @@ namespace Spectrapay.Services.IServices
     {
         //Task<DataResponse<string>> NotifyUser(NotificationDTO notification);
         Task AddNotificationAsync(int userId, string message);
+        Task<List<NotificationDTO>> GetAllNotifications();
     }
 }

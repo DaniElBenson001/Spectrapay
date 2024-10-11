@@ -22,5 +22,12 @@ namespace Spectrapay.Controllers
             var res = await _transactionService.GetTransactionHistory();
             return Ok(res);
         }
+
+        [HttpGet("get-transaction-by-id"), Authorize]
+        public async Task<IActionResult> GetTransactionById(int id)
+        {
+            var res = await _transactionService.GetTransactionById(id);
+            return Ok(res);
+        }
     }
 }

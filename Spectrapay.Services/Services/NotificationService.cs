@@ -37,5 +37,34 @@ namespace Spectrapay.Services.Services
             await _context.Notifications.AddAsync(newNotification);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<List<NotificationDTO>> GetAllNotifications()
+        {
+            List<NotificationDTO> getNotif = new();
+            int userId;
+
+            try
+            {
+                userId = Convert.ToInt32(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier));
+                var userNotifData = await _context.Notifications.Where(n => n.UserId == userId).ToListAsync();
+
+                foreach(var notification in userNotifData)
+                {
+                    getNotif.Add(new NotificationDTO()
+                    {
+                        Message = notification.Message,
+                        IsRead = notification.IsRead,
+                        CreatedAt = notification.CreatedAt,
+                        UserId = userId
+                    });
+
+                }
+                return getNotif;
+            }
+            catch(Exception)
+            {
+                return new List<NotificationDTO>();
+            }
+        }
     }
 }

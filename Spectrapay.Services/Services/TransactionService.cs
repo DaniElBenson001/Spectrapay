@@ -25,43 +25,45 @@ namespace Spectrapay.Services.Services
 
         public async Task<List<TransactionsDTO>> GetTransactionHistory()
         {
-            List<TransactionsDTO> getTransactions = new();
+            List<TransactionsDTO> getTxns = new();
             int userId;
 
             try
             {
                 userId = Convert.ToInt32(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                var userTransactionsData = await _context.Transactions.Where(t => t.SenderIdNum == userId || t.ReceiverIdNum == userId).ToListAsync();
+                var userTxnData = await _context.Transactions.Where(t => t.SenderIdNum == userId || t.ReceiverIdNum == userId).ToListAsync();
 
-                foreach(var txn in userTransactionsData)
+                foreach(var txn in userTxnData)
                 {
                     if(txn.SenderIdNum != 0 && txn.ReceiverIdNum == userId)
                     {
-                        getTransactions.Add(new TransactionsDTO
+                        getTxns.Add(new TransactionsDTO
                         {
                             AccountId = txn.ReceiverAcctId,
                             Amount = txn.Amount,
                             Timestamp = txn.Timestamp,
                             TxnType = txn.TransactionType,
                             TransferType = TransType.Credit,
-                            TxnStatus = txn.TransactionStatus
+                            TxnStatus = txn.TransactionStatus,
+                            TxnId = txn.TransactionId,
                         });
                     }
                     if(txn.ReceiverIdNum != 0 && txn.SenderIdNum == userId)
                     {
-                        getTransactions.Add(new TransactionsDTO
+                        getTxns.Add(new TransactionsDTO
                         {
                             AccountId = txn.SenderAcctId,
                             Amount = txn.Amount,
                             Timestamp = txn.Timestamp,
                             TxnType = txn.TransactionType,
                             TransferType = TransType.Debit,
-                            TxnStatus = txn.TransactionStatus
+                            TxnStatus = txn.TransactionStatus,
+                            TxnId = txn.TransactionId
                         });
                     }
                 }
-                return getTransactions;
+                return getTxns;
 
             }
             catch (Exception)
@@ -70,6 +72,44 @@ namespace Spectrapay.Services.Services
             }
         }
 
+        public async Task<DataResponse<TransactionsGeneralDTO>> GetTransactionById(int Id)
+        {
+            DataResponse<TransactionsGeneralDTO> txnResponse = new();
+
+            try
+            {
+                if(Id == 0)
+                {
+                    txnResponse.Status = false;
+                    txnResponse.StatusMessage = "Transaction Not Found!";
+                    return txnResponse;
+                }
+
+                var txnData = await _context.Transactions.Where(t => t.Id == Id).FirstOrDefaultAsync();
+
+                TransactionsGeneralDTO txnOutput = new()
+                {
+                    SenderAcctId = txnData!.SenderAcctId,
+                    ReceiverAcctId = txnData.ReceiverAcctId,
+                    Amount = txnData.Amount,
+                    Timestamp = txnData.Timestamp,
+                    TxnType = txnData.TransactionType,
+                    TxnStatus = txnData.TransactionStatus,
+                    TxnId = txnData.TransactionId
+                };
+
+                txnResponse.Status = true;
+                txnResponse.StatusMessage = "Successful";
+                txnResponse.Data = txnOutput;
+                return txnResponse;
+            }
+            catch(Exception)
+            {
+                txnResponse.Status = false;
+                txnResponse.StatusMessage = "Unsuccessful, An Error Occured!";
+                return txnResponse;
+            }
+        }
 
     }
 }

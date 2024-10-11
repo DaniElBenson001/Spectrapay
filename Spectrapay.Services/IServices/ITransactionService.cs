@@ -10,5 +10,6 @@ namespace Spectrapay.Services.IServices
     public interface ITransactionService
     {
         Task<List<TransactionsDTO>> GetTransactionHistory();
+        Task<DataResponse<TransactionsGeneralDTO>> GetTransactionById(int Id);
     }
 }
