@@ -76,7 +76,6 @@ SpectraPay
 │   ├── Controllers          // API Controllers (AuthController, PaymentController, TransactionController)
 │   ├── Middleware           // JWT Authentication Middleware
 │
-├── SpectraPay.Tests          // Unit and integration tests
 │
 └── SpectraPay.sln            // Solution file
 ```
