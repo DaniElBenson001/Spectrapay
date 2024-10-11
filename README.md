@@ -8,38 +8,39 @@ SpectraPay is an attempt to replicate the core functionalities of PayPal, focusi
 ### 1. Signup and Login
 - **Description**: Users can sign up using a username and password. User data is stored securely in the database.
 - **Endpoints**:
-  - `POST /api/auth/signup`: Registers a new user with username and password.
-  - `POST /api/auth/login`: Authenticates the user and generates a JWT token for access.
+  - `POST /v1/auth/signup`: Registers a new user with username and password.
+  - `POST /v1/auth/login`: Authenticates the user and generates a JWT token for access.
 
 ### 2. Token-based Authentication
 - **Description**: The system employs JWT (JSON Web Token) for authentication. After a successful login, the system generates a token that users must include in the Authorization header for accessing protected API endpoints.
 - **Endpoint**:
-  - `POST /api/auth/login`: Returns a JWT token upon successful login.
+  - `POST /v1/auth/login`: Returns a JWT token upon successful login.
 
 ### 3. Virtual Payments
 - **Description**: Users can transfer virtual money to another user by specifying the recipient and the amount.
 - **Endpoints**:
-  - `POST /api/payments/transfer`: Initiates a virtual transfer from the payer's account to the recipient's account.
+  - `POST /v1/payments/transfer`: Initiates a virtual transfer from the payer's account to the recipient's account.
 
 ### 4. Process Payments Locally
 - **Description**: All payments are processed locally using virtual money. No external payment gateways are involved. Balances are updated locally after each transaction.
 - **Endpoints**:
-  - `POST /api/payments/transfer`: Processes and completes the virtual payment, updating balances.
+  - `POST /v1/payments/transfer`: Processes and completes the virtual payment, updating balances.
 
 ### 5. View Transactions
 - **Description**: Users can view a list of their past transactions, including sent and received payments.
 - **Endpoints**:
-  - `GET /api/transactions`: Retrieves a list of all transactions made or received by the user.
+  - `GET /v1/transactions`: Retrieves a list of all transactions made or received by the user.
 
 ### 6. Detailed Transaction Info
 - **Description**: Users can view detailed information about a specific transaction, such as the date, amount, and status.
 - **Endpoints**:
-  - `GET /api/transactions/{transactionId}`: Fetches details of a specific transaction.
+  - `GET v1/Transaction/get-transaction-by-id?id=13`: Fetches details of a specific transaction.
 
 ### 7. Refund Payment
 - **Description**: Users can request a refund for recent transactions. Virtual money is transferred back to the original payer.
 - **Endpoints**:
-  - `POST /api/payments/refund`: Initiates a refund for a specified transaction.
+  - `POST /v1/payments/refund`: Initiates a refund for a specified transaction.
+- **Unfortunately, this feature was not implemented as a result of the proper case scenario to test and use it, since this projet assignment is to tackle the core functionalities***
 
 ### 8. View Balance
 - **Description**: Users can check their current virtual balance at any time.
