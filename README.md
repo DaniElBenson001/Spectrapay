@@ -34,7 +34,7 @@ SpectraPay is an attempt to replicate the core functionalities of PayPal, focusi
 ### 6. Detailed Transaction Info
 - **Description**: Users can view detailed information about a specific transaction, such as the date, amount, and status.
 - **Endpoints**:
-  - `GET v1/Transaction/get-transaction-by-id?id=13`: Fetches details of a specific transaction.
+  - `GET v1/Transaction/get-transaction-by-id?id=n`: Fetches details of a specific transaction where n is the id number of the transaction
 
 ### 7. Refund Payment
 - **Description**: Users can request a refund for recent transactions. Virtual money is transferred back to the original payer.
