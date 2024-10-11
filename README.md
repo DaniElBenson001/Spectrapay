@@ -40,7 +40,7 @@ SpectraPay is an attempt to replicate the core functionalities of PayPal, focusi
 - **Description**: Users can request a refund for recent transactions. Virtual money is transferred back to the original payer.
 - **Endpoints**:
   - `POST /v1/payments/refund`: Initiates a refund for a specified transaction.
-- **Unfortunately, this feature was not implemented as a result of the proper case scenario to test and use it, since this projet assignment is to tackle the core functionalities***
+- **Unfortunately, this feature was not implemented as a result of the improper case scenario to test and use it, since this projet assignment is to tackle the core functionalities***
 
 ### 8. View Balance
 - **Description**: Users can check their current virtual balance at any time.
