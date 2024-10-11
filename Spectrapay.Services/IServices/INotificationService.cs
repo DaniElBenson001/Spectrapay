@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Spectrapay.Services.IServices
 {
-    public interface IAuthService
+    public interface INotificationService
     {
-        Task<DataResponse<LoginTokenDTO>> Login(LoginUserDTO request);
+        //Task<DataResponse<string>> NotifyUser(NotificationDTO notification);
+        Task AddNotificationAsync(int userId, string message);
     }
 }

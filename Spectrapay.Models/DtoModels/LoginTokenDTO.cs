@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Spectrapay.Models.ViewModels
+namespace Spectrapay.Models.DtoModels
 {
-    public record class LoginView
+    public record class LoginTokenDTO
     {
         public string Username { get; set; } = string.Empty;
         public string? VerificationToken { get; set; }

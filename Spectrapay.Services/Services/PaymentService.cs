@@ -18,13 +18,16 @@ namespace Spectrapay.Services.Services
     public class PaymentService : IPaymentService
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly INotificationService _notificationService;
         private readonly DataContext _context;
 
-        public PaymentService(IHttpContextAccessor httpContextAccessor, DataContext context)
+        public PaymentService(IHttpContextAccessor httpContextAccessor,INotificationService notificationService , DataContext context)
         {
             _httpContextAccessor = httpContextAccessor;
+            _notificationService = notificationService;
             _context = context;
         }
+        
 
         public async Task<DataResponse<string>> MakeTransfer(PaymentDTO transfer)
         {
@@ -103,16 +106,23 @@ namespace Spectrapay.Services.Services
 
                 newTransaction.TransactionStatus = Status.Successful;
 
+                string senderMessage = $"You just sent {transfer.Amount} to {ReceiverAcctIdToGuid}";
+                string receiverMessage = $"You just received {transfer.Amount} from {SenderAcctIdToGuid}";
+
+                await _notificationService.AddNotificationAsync(SenderAcctData.Id, senderMessage);
+                await _notificationService.AddNotificationAsync(ReceiverAcctdata.Id, receiverMessage);
+
                 await _context.SaveChangesAsync();
 
                 transferResponse.Status = true;
                 transferResponse.StatusMessage = "Transfer Successful";
+                transferResponse.Data = "Notifications sent to both sender and receiver.";
                 return transferResponse;
             }
-            catch(Exception)
+            catch(Exception ex)
             {
                 transferResponse.Status = false;
-                transferResponse.StatusMessage = "Unsuccessful, An Error Occurred!";
+                transferResponse.StatusMessage = $"Unsuccessful, An Error Occurred!{ex.Message}";
                 return transferResponse;
             }
         }

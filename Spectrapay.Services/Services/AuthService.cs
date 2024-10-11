@@ -3,7 +3,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Spectrapay.Models.DtoModels;
 using Spectrapay.Models.Entities;
-using Spectrapay.Models.ViewModels;
 using Spectrapay.Services.Data;
 using Spectrapay.Services.IServices;
 using System;
@@ -28,9 +27,9 @@ namespace Spectrapay.Services.Services
             _context = context;
         }
 
-        public async Task<DataResponse<LoginView>> Login(LoginUserDTO request)
+        public async Task<DataResponse<LoginTokenDTO>> Login(LoginUserDTO request)
         {
-            DataResponse<LoginView> loginResponse = new();
+            DataResponse<LoginTokenDTO> loginResponse = new();
 
             try
             {
@@ -56,7 +55,7 @@ namespace Spectrapay.Services.Services
                 user.VerificationToken = token;
                 await _context.SaveChangesAsync();
 
-                var loginData = new LoginView
+                var loginData = new LoginTokenDTO
                 {
                     Username = request.Username!,
                     VerificationToken = token,

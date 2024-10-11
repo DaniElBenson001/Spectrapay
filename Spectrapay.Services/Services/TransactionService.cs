@@ -32,7 +32,7 @@ namespace Spectrapay.Services.Services
             {
                 userId = Convert.ToInt32(_httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-                var userTransactionsData = await _context.Transactions.Where(txn => txn.SenderIdNum == userId || txn.ReceiverIdNum == userId).ToListAsync();
+                var userTransactionsData = await _context.Transactions.Where(t => t.SenderIdNum == userId || t.ReceiverIdNum == userId).ToListAsync();
 
                 foreach(var txn in userTransactionsData)
                 {
