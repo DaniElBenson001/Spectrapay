@@ -6,7 +6,7 @@ SpectraPay is an attempt to replicate the core functionalities of PayPal, focusi
 ## Functional Requirements
 
 ### 1. Signup and Login
-- **Description**: Users can sign up using a username and password. User data is stored securely in the database.
+- **Description**: Users can sign up using a username and password. User data is stored securely in the database. User is automatically given a virtual balance of 10,000 for test transactions. User is set to NotVerified, NotLocked, NotDeleted by Default.
 - **Endpoints**:
   - `POST /v1/auth/signup`: Registers a new user with username and password.
   - `POST /v1/auth/login`: Authenticates the user and generates a JWT token for access.
